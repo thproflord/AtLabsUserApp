@@ -1,0 +1,16 @@
+/* 
+  Localizable.strings
+  AtLabsUserApp
+
+  Created by Fernando Gomes on 01/04/2022.
+  
+*/
+
+"noInternet_title" = "Sin Internet";
+"noInternet_description" = "No tiene Conexion a internet. Intentelo mas Tarde.";
+"ok" = "Ok";
+"followers_label" = "Seguidores";
+"repos_label" = "Repositorios";
+"bio" = "Biografia";
+"user_not_found_title" = "Usuario no Conseguido";
+"user_not_found_body" = "El usuario no existe. Intente otro usuario.";
