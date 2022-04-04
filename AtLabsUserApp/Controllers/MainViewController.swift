@@ -44,6 +44,7 @@ class MainViewController: UIViewController {
         containerView.layer.shadowRadius = 5
         containerView.layer.shadowOpacity = 0.3
         containerView.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(goToDetails)))
+        avatarImage.addGestureRecognizer(UITapGestureRecognizer(target: self, action: #selector(fullScreenImage)))
         containerView.isHidden = true
     }
     
@@ -103,9 +104,31 @@ class MainViewController: UIViewController {
         }
     }
     
+    //MARK: - Obj C Functions
+    
     @objc func goToDetails(){
         performSegue(withIdentifier: Constants.to_detail, sender: nil)
     }
+    
+    @objc func fullScreenImage() {
+        let newImageView = UIImageView(image: avatarImage.image)
+        newImageView.frame = UIScreen.main.bounds
+        newImageView.backgroundColor = .black
+        newImageView.contentMode = .scaleAspectFit
+        newImageView.isUserInteractionEnabled = true
+        let tap = UITapGestureRecognizer(target: self, action: #selector(dismissFullscreenImage))
+        newImageView.addGestureRecognizer(tap)
+        self.view.addSubview(newImageView)
+        self.navigationController?.isNavigationBarHidden = true
+        self.tabBarController?.tabBar.isHidden = true
+    }
+
+    @objc func dismissFullscreenImage(sender: UITapGestureRecognizer) {
+        self.navigationController?.isNavigationBarHidden = false
+        self.tabBarController?.tabBar.isHidden = false
+        sender.view?.removeFromSuperview()
+    }
+    
     
     // MARK: - Prepare Segue
     override func prepare(for segue: UIStoryboardSegue, sender: Any?){
@@ -114,11 +137,7 @@ class MainViewController: UIViewController {
             vc?.username = self.username.text!
         }
     }
-
 }
-
-
-
 
 // MARK: - SerachBar Delegate
 extension MainViewController: UISearchBarDelegate {
